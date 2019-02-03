@@ -23,16 +23,18 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url() ?>assets/dist/img/avatar2.png" class="user-image" alt="User Image">
-              <span class="hidden-xs" style="text-transform: capitalize;"><?php echo $this->session->nama ?></span>
+              <span class="hidden-xs" style="text-transform: capitalize;"><?php echo $this->session->nama_user ?></span>
+              
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="<?php echo base_url() ?>assets/dist/img/avatar2.png" class="img-circle" alt="User Image">
                 <p>
-                  <strong style="text-transform: capitalize;"><?php echo $this->session->nama ?></strong><br>
+                  <strong style="text-transform: capitalize;"><?php echo $this->session->nama_user ?></strong><br>
                   
                 </p>
+                <p><strong style="text-transform: capitalize;"><?php echo $this->session->role ?></strong></p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -72,23 +74,28 @@
         <li class="<?php echo $menu == "home" ? "active" : '' ?>">
           <a href="<?php echo base_url() ?>admin/home"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
+        <?php if(access(['Eksekutif','Admin'])): ?>
         <li class="<?php echo $menu == "pengumuman" ? "active" : '' ?>">
           <a href="<?php echo base_url() ?>admin/pengumuman">
             <i class="fa fa-newspaper-o"></i> <span>Pengumuman</span>
           </a>
         </li>
-        <li class="<?php echo $menu == "user" ? "active" : '' ?>">
-          <a href="<?php echo base_url() ?>admin/user"><i class="fa fa-user"></i> <span>Manajemen User</span></a>
-        </li>  
-        <?php if(access(['FA','Eksekutif'])): ?>
+        <?php endif ?>
+         
+        <?php if(access(['FA','Admin'])): ?>
         <li class="<?php echo $menu == "payroll" ? "active" : '' ?>">
           <a href="<?php echo base_url() ?>admin/payroll"><i class="fa fa-book"></i> <span>Payroll</span></a>
         </li>
         <?php endif; ?>
-        <?php if(access(['FA'])): ?>
+        <?php if(access(['FA','Admin','Eksekutif'])): ?>
           <li class="<?php echo $menu == "permohonan" ? "active" : '' ?>">
             <a href="<?php echo base_url() ?>admin/permohonan"><i class="fa fa-edit"></i> <span>Permohonan</span></a>
           </li>
+        <?php endif; ?>
+        <?php if(access(['Admin'])): ?>
+        <li class="<?php echo $menu == "user" ? "active" : '' ?>">
+          <a href="<?php echo base_url() ?>admin/user"><i class="fa fa-user"></i> <span>Manajemen User</span></a>
+        </li> 
         <?php endif; ?>
         
         <!-- MENU PERMOHONAN -->

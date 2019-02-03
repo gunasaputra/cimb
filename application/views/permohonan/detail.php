@@ -107,6 +107,9 @@
                   </tbody>
                 </table>      
               </div>
+              <div class="box-footer">
+                <a href="<?= base_url() ?>admin/permohonan" class="btn btn-default" >Kembali</a>
+              </div>
               <!-- /.box-body -->
             </div>
           </div>        

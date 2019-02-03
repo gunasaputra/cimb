@@ -31,15 +31,16 @@
 
 		public function form(){
 			$status = [
-				['name' => 'aktiv' , 'value' => '1'],
-				['name' => 'tidak aktiv' , 'value' => '0'],
+				['name' => 'Dalam Proses' , 'value' => '1'],
+				['name' => 'Diterima' , 'value' => '2'],
+				['name' => 'Ditolak' , 'value' => '3'],
 			];
 
 			$payroll = $this->Payroll_model->getDataOption()->result_array();
 			// print_r($payroll);
 			// exit();
 
-			return [
+			$data = [
 				['label' => 'Nama Nasabah','name' => 'nama_nasabah'],
 				['label' => 'Tanggal Lahir','name' => 'dob', 'type' => 'datepicker'],
 				['label' => 'Alamat Nasabah','name' => 'alamat_nasabah'],
@@ -54,6 +55,12 @@
 				['label' => 'Nomor Rekening','name' => 'no_rekening'],
 	            ['label' => 'Payroll','name' => 'payroll_id', 'type' => 'select', 'option' => $payroll],
 			];
+
+			if($_SESSION['role'] == "Admin"){
+				array_push($data,['label' => 'Status','name' => 'status_permohonan', 'type' => 'select','option' => $status ]);
+			}
+
+			return $data;
 		}
 	 	
 		public function index(){

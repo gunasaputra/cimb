@@ -18,12 +18,12 @@ if ( ! function_exists('access'))
 {
 	function access($array)
 	{
+		$data = false;
 		foreach ($array as $key => $value) {
 			if($value == $_SESSION['role']){
-				return true;
-			}else{
-				return false;
+				$data = true;
 			}
 		}
+		return $data;
 	}
 }

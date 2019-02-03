@@ -31,7 +31,17 @@ class Pengumuman_model extends CI_Model{
 		if($id != false){
 			$this->db->where($this->primary_key,$id);
 		}
-		$this->db->select('*','$this->primary_key as p_id');
+		$this->db->select("*,$this->primary_key as p_id");
+		$this->db->join("user","pengumuman.user_id = user.id");
+		return $this->db->get($this->table);
+	}
+
+	public function getDataActive($id = false){
+		if($id != false){
+			$this->db->where($this->primary_key,$id);
+		}
+		$this->db->select("*,$this->primary_key as p_id");
+		$this->db->where('pengumuman.status',1);
 		$this->db->join("user","pengumuman.user_id = user.id");
 		return $this->db->get($this->table);
 	}

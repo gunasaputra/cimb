@@ -27,19 +27,23 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title"><?php echo $template->title ?> </h3>
-                <a href="<?php echo base_url().$template->controller ?>/add" class="btn btn-md btn-primary pull-right"><span class="fa fa-plus"></span> Tambah Data <?php echo $template->title ?></a>
+                <?php if(access(['FA'])): ?>
+                  <a href="<?php echo base_url().$template->controller ?>/add" class="btn btn-md btn-primary pull-right"><span class="fa fa-plus"></span> Tambah Data <?php echo $template->title ?></a>
+                <?php endif; ?>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Nasabah</th> 
-                    <th>Payroll</th>                                   
-                    <th>Tanggal Lahir</th>
-                    <th>Pengajuan</th>
-                  </tr>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Nasabah</th> 
+                      <th>Payroll</th>                                   
+                      <th>Tanggal Lahir</th>
+                      <th>Pengajuan</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
                   </thead>
                   <tbody>
                     <?php 
@@ -51,10 +55,13 @@
                         <td><?php echo $row->nama_payroll ?></td>
                         <td><?php echo date('d-m-Y',strtotime($row->dob)) ?></td>
                         <td>Rp. <?php echo number_format($row->pengajuan) ?></td>
+                        <td><?php echo status_permohonan($row->status_permohonan) ?></td>
                         <td>
+                        <?php if(access(['FA','Admin'])): ?>
                           <a href="<?php echo base_url().$template->controller ?>/edit/<?php echo $row->p_id ?>" class="btn btn-success btn-sm">
                             <i class="fa fa-edit"></i> Ubah
-                          </a>  
+                          </a> 
+                        <?php endif; ?>
                           <a href="<?php echo base_url().$template->controller ?>/detail/<?php echo $row->p_id ?>" class="btn btn-info btn-sm">
                             <i class="fa fa-eye"></i> Lihat
                           </a>                        

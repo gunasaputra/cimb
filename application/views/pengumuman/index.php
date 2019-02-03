@@ -38,6 +38,7 @@
                     <th>Judul Pengumuman</th>                                    
                     <th>Isi pengumuman</th>
                     <th>Status</th>
+                    <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
